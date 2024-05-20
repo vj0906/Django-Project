@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quizzers</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+      body {
+        background-color: #202833;
+        color: #fff;
+      }
+  
+      .login-container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+  
+      .login-form {
+        background-color: #333;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+      }
+  
+      .form-control {
+        background-color: #3d4b55;
+        color: #fff;
+        border: none;
+      }
+  
+      .form-control:focus {
+        background-color: #3d4b55;
+        color: #fff;
+        border-color: #46a29f;
+        box-shadow: none;
+      }
+  
+      .btn-login {
+        background-color: #46a29f;
+        border-color: #46a29f;
+        color: #fff;
+        width: 100%;
+      }
+  
+      .btn-login:hover {
+        background-color: #195c73;
+        border-color: #195c73;
+      }
+  
+      .nav-link {
+        color: #46a29f;
+      }
+  
+      .nav-link:hover {
+        color: #fff;
+      }
+    </style>
+</head>
+
+<body style="background-color: #202833;">
+  <h2 class="d-flex justify-content-center">Login</h2>
+  <div class="container d-flex border justify-content-center align-items-center p-50" style="height: 400px;width: 400px;border-radius: 20px;">
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <div class="container col-md-4">
+        <button type="submit" class="btn" style="background-color: #46a29f;color: white;">Login</button>
+      </div>
+      <div class="d-flex align-items-center mb-3" 
+            style="margin-top: 20px;">
+        <p class="mb-0">Don't have an account?</p>
+        <a class="nav-link custom-link ms-2" href="{% url 'signup' %}" style="color: aqua;">SignUp</a>
+      </div>
+    </form>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+</body>
+
+</html>

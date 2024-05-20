@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Score and Feedback</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+  {% extends 'base.html' %}
+  {% block content %}
+  <div id="app">
+    <div class="container mt-5" style="color: #202833;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    ">
+      <h1 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      ">Quiz Score</h1>
+      <div class="mt-3">
+        <h2 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        ">Your Score: <span id="category-title">{{ score }}</span> / <span v-text="totalPossibleScore"></span></h2>
+        <!-- <div class="mb-3">
+          <label for="feedback">Feedback:</label>
+          <textarea id="feedback" class="form-control" rows="3" placeholder="Provide your feedback"></textarea>
+        </div>
+        <button class="btn btn-danger" @click="submitFeedback">Submit Feedback</button> -->
+        <button class="btn btn-dark" @click="redirectToLeaderboard" style="background-color: #46a29f;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        ">Leaderboard</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-d7cOIQaKupi6ZvDHU+bd5tW0aEfloSwi19+UKY5xlLOxhj1BC2JqF02r33JvRmY" crossorigin="anonymous"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        score: 0,
+      },
+      created() {
+        // Retrieve the score from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        this.score = parseInt(urlParams.get('score')) || 0;
+        this.totalPossibleScore = parseInt(urlParams.get('total_possible_score')) || 0;
+        console.log('Score:', this.score);
+        console.log('Total Possible Score:', this.totalPossibleScore);
+      },
+      methods: {
+        submitFeedback() {
+          const feedback = document.getElementById('feedback').value;
+          console.log('Feedback:', feedback);
+        },
+        redirectToLeaderboard() {
+          const category = new URLSearchParams(window.location.search).get('category');
+          const leaderboardURL = `/category_leaderboard/${category}/`;
+
+          // Redirect to the leaderboard
+          window.location.href = leaderboardURL;
+        },
+      },
+    });
+  </script>
+  {% endblock %}
+</body>
+
+</html>
